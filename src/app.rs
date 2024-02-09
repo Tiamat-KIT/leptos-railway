@@ -17,7 +17,23 @@ pub fn App() -> impl IntoView {
 
         // sets the document title
         <Title text="Welcome to Leptos"/>
-
+        <Script>
+            "
+            var video = document.getElementById('video');
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                });
+            }
+            video.addEventListener('progress',()=>{
+            console.log("test")
+            context.drawImage(video, 0, 0, 640, 480);
+            })
+            "
+        </Script>
         // content for this welcome page
         <Router fallback=|| {
             let mut outside_errors = Errors::default();
@@ -46,17 +62,19 @@ pub async fn count_up(counter: u32) -> Result<u32, ServerFnError> {
 #[component]
 fn HomePage() -> impl IntoView {
     // Creates a reactive value to update the button
-    let (count, set_count) = create_signal(0);
+    /* let (count, set_count) = create_signal(0);
     let on_click = move |_| {
         let c = count();
         spawn_local(async move {
             let response = count_up(c).await.expect("api call failed");
             set_count.update(|count| *count = response)
         });
-    };
+    }; */
 
     view! {
         <h1>"Welcome to Leptos!"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
+        <div id="video" autoplay/>
+        <canvas id="canvas" width="640" height="480"/>
+        /* <button on:click=on_click>"Click Me: " {count}</button> */
     }
 }
