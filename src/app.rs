@@ -29,7 +29,7 @@ pub fn App() -> impl IntoView {
                 });
             }
             video.addEventListener('progress',()=>{
-            console.log("test")
+            console.log('test')
             context.drawImage(video, 0, 0, 640, 480);
             })
             "
