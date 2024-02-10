@@ -60,7 +60,7 @@ fn HomePage() -> impl IntoView {
         <video id="video" />
         <script>
         "
-        const videoEl = document.getElementById("video")
+        const videoEl = document.getElementById('video')
         videoEl.width = 360;
         videoEl.height = 240;
         videoEl.autoplay = true;
@@ -68,7 +68,10 @@ fn HomePage() -> impl IntoView {
         media = navigator.mediaDevices.getUserMedia({
             audio: false,
             video: { width: {ideal: 1080},height: {ideal: 720}}
-        }).then((stream) => {video.srcObject = stream;})
+        }).then((stream) => {
+            video.srcObject = stream;
+            video.play();
+        })
         "
         </script>
         /* <button on:click=on_click>"Click Me: " {count}</button> */
