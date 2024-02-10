@@ -59,6 +59,7 @@ fn HomePage() -> impl IntoView {
         <div id="video" autoplay/>
         <canvas id="canvas" width="640" height="480"/>
         <script>
+            "
             var video = document.getElementById('video');
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
@@ -72,6 +73,7 @@ fn HomePage() -> impl IntoView {
             console.log('test')
             context.drawImage(video, 0, 0, 640, 480);
             })
+            "
         </script>
         /* <button on:click=on_click>"Click Me: " {count}</button> */
     }
