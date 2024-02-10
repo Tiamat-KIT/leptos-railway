@@ -17,23 +17,6 @@ pub fn App() -> impl IntoView {
 
         // sets the document title
         <Title text="Welcome to Leptos"/>
-        <Script>
-            "
-            var video = document.getElementById('video');
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-                    video.srcObject = stream;
-                    video.play();
-                });
-            }
-            video.addEventListener('progress',()=>{
-            console.log('test')
-            context.drawImage(video, 0, 0, 640, 480);
-            })
-            "
-        </Script>
         // content for this welcome page
         <Router fallback=|| {
             let mut outside_errors = Errors::default();
@@ -72,6 +55,23 @@ fn HomePage() -> impl IntoView {
     }; */
 
     view! {
+        <Script>
+            "
+            var video = document.getElementById('video');
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                });
+            }
+            video.addEventListener('progress',()=>{
+            console.log('test')
+            context.drawImage(video, 0, 0, 640, 480);
+            })
+            "
+        </Script>
         <h1>"Welcome to Leptos!"</h1>
         <div id="video" autoplay/>
         <canvas id="canvas" width="640" height="480"/>
