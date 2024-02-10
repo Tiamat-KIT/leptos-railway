@@ -56,24 +56,19 @@ fn HomePage() -> impl IntoView {
 
     view! {
         <h1>"Welcome to Leptos!"</h1>
-        <div id="video" autoplay/>
-        <canvas id="canvas" width="640" height="480"/>
+        <h3>カメラ映像表示</h3>
+        <video autoplay id="video" />
         <script>
-            "
-            var video = document.getElementById('video');
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-                    video.srcObject = stream;
-                    video.play();
-                });
-            }
-            video.addEventListener('progress',()=>{
-            console.log('test')
-            context.drawImage(video, 0, 0, 640, 480);
-            })
-            "
+        "const video = document.getElementById('video')
+        navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false,
+        }).then(stream => {
+            video.srcObject = stream;
+            video.play()
+        }).catch(e => {
+            console.log(e)
+        })"
         </script>
         /* <button on:click=on_click>"Click Me: " {count}</button> */
     }
