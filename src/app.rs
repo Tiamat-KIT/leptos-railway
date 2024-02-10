@@ -55,7 +55,7 @@ fn HomePage() -> impl IntoView {
     }; */
 
     view! {
-        <Script>
+        <script>
             "
             var video = document.getElementById('video');
             var canvas = document.getElementById('canvas');
@@ -71,7 +71,7 @@ fn HomePage() -> impl IntoView {
             context.drawImage(video, 0, 0, 640, 480);
             })
             "
-        </Script>
+        </script>
         <h1>"Welcome to Leptos!"</h1>
         <div id="video" autoplay/>
         <canvas id="canvas" width="640" height="480"/>
